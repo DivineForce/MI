@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "setwd(\"/home/apurva/Desktop/cage_weights/Batch13\")\n\n# Use grep and grep1 with subset\n\n\nlibrary(readxl)\nlibrary(plyr)\n\n\n\n#CSV filenames to use \nBatch=\"Batch13\"\nnumber=\"B13-\"\n\ndf <- read_excel(\"MI_P50_Batch13_23August2016.xlsx\", col_names = T, na = \"\")\n\n\n\n# Template \n\ntranspnum\nbatchnumber\ncagenumber\ncomments\nresolution\nweight_1\ndate_1\nweight_2\ndate_2\nweight_3\ndate_3\nweight_4\ndate_4\nweight_5\ndate_5\nweight_6\ndate_6\nweight_7\ndate_7\nweight_8\ndate_8\nweight_9\ndate_9\nweight_10\ndate_10\n\n\n# Step 1\n# First convert all column names to lower case\nnames(df) <- tolower(names(df))\n\n# 1. tranpsnum \ntranspnum_index<-grep(\"transpnum\",names(df))\ntranspnum<-df[,transpnum_index]\n\n\n# 2. batchnumber\n# Use variable Batch\nr<-nrow(df)\nbatchnumber<-rep('Batch13',r)\nnames(batchnumber)=\"batchnumber\"\n\n# 3. cagenumber\ncage_index<-grep(\"^cage$\",names(df))\ncagenumber<-df[,cage_index]\nnames(cagenumber)<-\"cagenumber\"\n#Append batch to cagenumber \ncagenumber<-paste(number,cagenumber,sep=\"\")\n\n# 4. Comments\ncomments_index<-grep(\"^comments$\",names(df))\ncomments<-df[,comments_index]\n\n# 5. Resolution\nresolution_index<-grep(\"^resolution$\",names(df))\nresolution<-df[,resolution_index]\n\n# weight and date values \n# Grep everything after resolution index \ndate_weight<-df[(resolution_index+1):ncol(df)]\n\n\n\n\n\n\n\n\n\nyo<-as.data.frame(transpnum,batchnumber,date_weight)\n\n\n\n# Append Batch to the cagenumber \n\nView(bcage)\nrownames(tranp) <- NULL\ntranspnum<-tranp\n\n\n\n\n\n\n\n#CSV file name \nname.to.use<-paste(\"P50-Novelty_Seeking-Processed_\",Batch,\".csv\",sep=\"\")\n\nrm(list=ls())\n",
+    "created" : 1489698879272.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3284151560",
+    "id" : "CFFD7500",
+    "lastKnownWriteTime" : 1489699451,
+    "last_content_update" : 1489699451959,
+    "path" : "~/Desktop/Dropbox (Palmer Lab)/Palmer Lab/P50 NIDA GWAS/Database/gitCodes/MI/MI_cage_weights.R",
+    "project_path" : "MI_cage_weights.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
